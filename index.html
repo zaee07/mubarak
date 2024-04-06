@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Hari Raya Idul Fitri</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        html,body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        /* .myvid {
+            margin: 20vh auto;
+            display: none; 
+        } */
+        #vid {
+            display: none;
+        }
+        .myclock{
+	  		display: none;
+	  		position: absolute;
+	  		z-index: 2;
+	  		color: black;
+	  		text-align: center;
+            justify-content: center;
+            align-items: center;
+	  		width: calc(100vw - 50px);
+	  		padding: 25px;
+            margin: 1rem auto;
+	  	}
+        .contjam{
+	  		width: 100%;
+	  		top: 20vh;
+	  		transform: translateY(-50%);
+	  		text-align: center;
+	  		margin: 0;
+	  		padding: 0;
+	  	}
+	  	.ucapan{
+	  		position: relative;
+            align-items: center;
+            justify-content: center;
+	  		color: #000000;
+	  		font-size: 20px;
+	  		background: #EAEAEA90;
+	  		width: 100%;
+            display: flex;
+            padding: 20px 10px;
+	  		border-radius: 25px;
+            margin: 1rem 1.5rem;
+	  		transition: all ease 0.3s;
+	  	}
+	  	.ucapan:active{
+	  		transform: scale(1.02);
+	  	}
+	  	.ucapan:hover, .ucapan *:hover{
+	  		cursor: pointer;
+	  	}
+	  	.ucapan::before{
+	  		/* content: 'ketuk untuk mencari'; */
+	  		font-size: 12pt;
+	  		width: 200px;
+	  		height: 50px;
+	  		line-height: 50px;
+	  		left: 50%;
+	  		bottom: -80px;
+	  		background: #FFFFFFB0;
+	  		position: absolute;
+	  		z-index: 99;
+	  		border-radius: 10px;
+	  		transform: translateX(-50%);
+	  		opacity: 0;
+	  		transition: all ease 0.3s;
+	  		pointer-events: none;
+	  	}
+	  	.ucapan:hover::before{
+	  		bottom: -60px;
+	  		opacity: 1;
+	  	}
+    </style>
+</head>
+<body>
+    <div class="h-100 bg-info">
+        <h2 class="text-center">
+            <marquee behavior="" direction="">
+                <img src="https://zaee07.my.id/assets/img/ketupat.png" alt="kupat" width="32px">
+                Selamat Hari Raya Idul Fitri 1445H 
+                <img src="https://zaee07.my.id/assets/img/ketupat.png" alt="kupat" width="32px">
+            </marquee>
+        </h2>
+        <div class="myclock">
+            <div class="contjam">
+                <div class="ucapan myoverlay"><span id="spannama"></span></div>	
+            </div>
+        </div>
+        <div class="myvid d-flex justify-content-center align-items-center" id="myvid">
+            <video id="vid" class="object-fit-contain">
+                <source src="https://zaee07.my.id/assets/img/video.mp4" type="video/mp4">
+                Your browser doesn`t support HTML5 video OR activated javascript.
+            </video>
+        </div>
+        <div class="main justify-content-center align-items-center text-center">
+            <img src="https://zaee07.my.id/assets/img/eid.png" alt="eid" class="img-fluid" width="40%" height="100%">
+            <div class="h3">Selamat Hari Raya Idul Fitri ^.^</div>
+            <p>Di bulan yang berkah ini, semoga Allah SWT mengampuni dosa kita. Maukah kamu memaafkan ku?</p>
+            <div class="mybtn">
+                <button type="button" id="yes" class="btn btn-warning">ya</button>
+                <button type="button" id="no" class="btn btn-danger" onmouseover="acak()" onclick="acak()">gak</button>
+            </div>
+        </div>
+        <footer class="text-center footer fixed-bottom">
+            <h4>made with ❤️ by Ihza</h4>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        const main = document.querySelector('div.main');
+        const myvid = document.getElementById('myvid');
+        const vid = document.getElementById('vid');
+        const ya = document.getElementById('yes');
+        let no = document.getElementById('no');
+        // blm
+        function mytanggal(){
+			var hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+			var bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'Nopember', 'Desember'];
+			var d = new Date();
+			var dayName = hari[d.getDay()];
+			var monthName = bulan[d.getMonth()];
+            let tanggal=(dayName+', '+d.getDate()+' '+monthName);
+			document.querySelector('div.tanggal').innerHTML = tanggal;
+		}
+        function checkTime(i) {
+			if (i < 10) {i = "0" + i};
+			return i;
+		}
+        function startTime(){
+			var today = new Date();
+			var h = today.getHours();
+			// document.querySelector('div.jam').innerHTML =	h + ":" + m;
+			var t = setTimeout(startTime, 500);
+            if(h>23)tulis('malam','seharusnya kamu sudah tidur');
+            else if(h>18)tulis('malam','waktunya mengisi energi');
+            else if(h>17)tulis('petang','selamat menikmati senja');
+            else if(h>14)tulis('sore','selamat menjalani hari');
+            else if(h>13)tulis('siang','tetap semangat')
+            else if(h>9)tulis('siang','selamat bekerja')
+            else if(h>4)tulis('pagi','selamat beraktivitas');
+            else tulis('malam','seharusnya kamu sudah tidur');
+        }
+        function tulis(waktu,ucapan){
+            document.getElementById("spannama").innerHTML = `Selamat ${waktu}, ${ucapan}`;
+        }
+        function acak() {
+            let x = Math.round(Math.random()) * 300 +1;
+            let y = Math.round(Math.random()) * 300 +1;
+            no.style.position ='absolute';
+            no.style.top = y+ 'px';
+            no.style.left = x + 'px';
+        }
+        function maaf() {
+            document.querySelector('div.myclock').style.display = 'block';
+            myvid.style.margin = '20vh auto';
+            startTime();
+            main.style.display = 'none';
+            vid.style.display = 'block';
+            vid.play();
+            vid.onended = () => {
+                const name = prompt("masukan namamu ^_^");
+                let msg = "";
+                console.log(name);
+                if ( name == null || name == "" ) {
+                    msg = `iza said : mohon maaf lahir batin anonym 🙏`;
+                } else {
+                    msg = `iza said : mohon maaf lahir batin ${name} 🙏`;
+                }
+                alert("Eid Mubarak\nMay Allah bring us joy, health, happiness,\npeace and prosperity on this blessed day.");
+                alert(msg);
+                window.location = `https://wa.me/62859126203623?text=Mohon%20Maaf%20Lahir%20Batin%20za%20!!!%0AFrom:%20${name}`;
+            }
+        }
+        ya.addEventListener('click', maaf);
+    </script>
+</body>
+</html>
