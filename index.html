@@ -11,10 +11,6 @@
             margin: 0;
             padding: 0;
         }
-        /* .myvid {
-            margin: 20vh auto;
-            display: none; 
-        } */
         #vid {
             display: none;
         }
@@ -59,7 +55,6 @@
 	  		cursor: pointer;
 	  	}
 	  	.ucapan::before{
-	  		/* content: 'ketuk untuk mencari'; */
 	  		font-size: 12pt;
 	  		width: 200px;
 	  		height: 50px;
@@ -121,20 +116,10 @@
         const vid = document.getElementById('vid');
         const ya = document.getElementById('yes');
         let no = document.getElementById('no');
-        // blm
-        function mytanggal(){
-			var hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-			var bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'Nopember', 'Desember'];
-			var d = new Date();
-			var dayName = hari[d.getDay()];
-			var monthName = bulan[d.getMonth()];
-            let tanggal=(dayName+', '+d.getDate()+' '+monthName);
-			document.querySelector('div.tanggal').innerHTML = tanggal;
-		}
-        function checkTime(i) {
-			if (i < 10) {i = "0" + i};
-			return i;
-		}
+        
+        function tulis(waktu,ucapan){
+            document.getElementById("spannama").innerHTML = `Selamat ${waktu}, ${ucapan}`;
+        }
         function startTime(){
 			var today = new Date();
 			var h = today.getHours();
@@ -147,14 +132,14 @@
             else if(h>13)tulis('siang','tetap semangat')
             else if(h>9)tulis('siang','selamat bekerja')
             else if(h>4)tulis('pagi','selamat beraktivitas');
-            else tulis('malam','seharusnya kamu sudah tidur');
-        }
-        function tulis(waktu,ucapan){
-            document.getElementById("spannama").innerHTML = `Selamat ${waktu}, ${ucapan}`;
+            else tulis('malam','jangan begadang nanti sakit :)');
         }
         function acak() {
-            let x = Math.round(Math.random()) * 300 +1;
-            let y = Math.round(Math.random()) * 300 +1;
+            let maxX = window.innerWidth - no.offsetWidth;
+            let maxY = (window.innerHeight - 50) - no.offsetHeight;
+            let x = Math.round(Math.random() * maxX +1);
+            let y = Math.round(Math.random() * maxY +1);
+
             no.style.position ='absolute';
             no.style.top = y+ 'px';
             no.style.left = x + 'px';
@@ -167,14 +152,9 @@
             vid.style.display = 'block';
             vid.play();
             vid.onended = () => {
-                const name = prompt("masukan namamu ^_^");
-                let msg = "";
-                console.log(name);
-                if ( name == null || name == "" ) {
-                    msg = `iza said : mohon maaf lahir batin anonym 🙏`;
-                } else {
-                    msg = `iza said : mohon maaf lahir batin ${name} 🙏`;
-                }
+                let name = prompt("masukan namamu ^_^");
+                (name == null || name == "") ? name = "anonym": name;
+                let msg = `iza said : mohon maaf lahir batin ${name} 🙏`;
                 alert("Eid Mubarak\nMay Allah bring us joy, health, happiness,\npeace and prosperity on this blessed day.");
                 alert(msg);
                 window.location = `https://wa.me/62859126203623?text=Mohon%20Maaf%20Lahir%20Batin%20za%20!!!%0AFrom:%20${name}`;
